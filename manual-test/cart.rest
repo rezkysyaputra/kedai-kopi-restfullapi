@@ -1,0 +1,34 @@
+POST http://localhost:3000/products/6/carts
+Content-Type: application/json
+Accept: application/json
+Authorization: df2a1f76-15cd-46cd-98c5-d3acab66ee93
+
+{
+    "quantity" : 9
+}
+
+###
+GET  http://localhost:3000/carts
+Content-Type: application/json
+Accept: application/json
+Authorization: 0ded79e9-b84f-4c21-b202-3b5ba520312c
+
+###
+PATCH  http://localhost:3000/carts
+Content-Type: application/json
+Accept: application/json
+Authorization: 0ded79e9-b84f-4c21-b202-3b5ba520312c
+
+{
+    "cartItemId" : 5,
+    "quantity" : 5
+}
+###
+DELETE http://localhost:3000/carts
+Content-Type: application/json
+Accept: application/json
+Authorization: 0ded79e9-b84f-4c21-b202-3b5ba520312c
+
+{
+    "cartItemId" : 4
+}

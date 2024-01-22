@@ -1,0 +1,43 @@
+POST http://localhost:3000/addresses
+Content-Type: application/json
+Accept: application/json
+Authorization: df2a1f76-15cd-46cd-98c5-d3acab66ee93
+
+{
+  "name" : "budi 2",
+  "phone" : "085219331476",
+  "street": "Jalan Toli-Toli",
+  "city": "Palu",
+  "province": "Sulawesi Tengah",
+  "postalCode": "1234",
+  "country": "Indonesia"
+}
+
+###
+PATCH  http://localhost:3000/addresses/5
+Content-Type: application/json
+Accept: application/json
+Authorization: a0168541-4092-4c01-9fd8-fad37f6befda
+
+{
+  "name" : "asep",
+  "phone" : "0852193314722"
+}
+
+###
+GET http://localhost:3000/addresses/10
+Content-Type: application/json
+Accept: application/json
+Authorization: df2a1f76-15cd-46cd-98c5-d3acab66ee93
+
+###
+GET http://localhost:3000/addresses
+Content-Type: application/json
+Accept: application/json
+Authorization: df2a1f76-15cd-46cd-98c5-d3acab66ee93
+
+###
+DELETE http://localhost:3000/addresses/8
+Content-Type: application/json
+Accept: application/json
+Authorization: a0168541-4092-4c01-9fd8-fad37f6befda

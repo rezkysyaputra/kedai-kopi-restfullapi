@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  username String @id @db.VarChar(100)
+  password String @db.VarChar(100)
+  name String @db.VarChar(100)
+  token String? @db.VarChar(100)
+  addresses Address[]
+  cart Cart?
+  
+  @@map("users")
+}
+
+model Product {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(100)
+  price Float
+  stock Int
+  cartItems  CartItem[]
+  order OrderItem[]
+
+  @@map("products")
+}
+
+model Address {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(100) 
+  phone String @db.VarChar(100)
+  street String @db.VarChar(255) 
+  city String @db.VarChar(100) 
+  province String @db.VarChar(100) 
+  country String @db.VarChar(100) 
+  postalCode String @db.VarChar(10)
+  username String @db.VarChar(100)
+  orders Order[]
+  user User @relation(fields: [username], references: [username])
+
+  @@map("addresses")
+}
+
+model Cart {
+  id Int @id @default(autoincrement())
+  orders Order[]
+  cartItems CartItem[]
+  username String @db.VarChar(100) @unique
+
+  user User @relation(fields: [username], references: [username])
+
+  @@map("carts")
+}
+
+model CartItem {
+  id Int @id @default(autoincrement())
+  cartId Int
+  productId Int
+  quantity Int
+  
+  cart Cart @relation(fields: [cartId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+  @@unique([cartId, productId])
+  @@map("cartitems")
+}
+
+model Order {
+  id Int @id @default(autoincrement())
+  status OrderStatus @default(PROCESS)
+  createdAt DateTime @default(now())
+  completedAt DateTime?
+  totalAmount Float
+  addressId Int
+  cartId Int
+  orders OrderItem[]
+
+  cart Cart @relation(fields: [cartId], references: [id])
+  address Address @relation(fields: [addressId], references: [id])
+
+ @@map("orders")
+}
+
+model OrderItem {
+  id Int @id @default(autoincrement())
+  orderId Int
+  productId Int
+  quantity Int
+
+  order Order @relation(fields: [orderId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("orderitems")
+}
+
+enum OrderStatus {
+  PROCESS
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}

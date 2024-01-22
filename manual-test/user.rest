@@ -1,0 +1,49 @@
+
+POST http://localhost:3000/users
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username" : "budi",
+    "password" : "111",
+    "name" : "test budi"
+}
+
+###
+POST  http://localhost:3000/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username" : "budi",
+    "password" : "111"
+}
+
+###
+{
+    "username" : "test",
+    "password" : "1234update"
+}
+
+###
+GET  http://localhost:3000/users/current
+Content-Type: application/json
+Accept: application/json
+Authorization: 0ded79e9-b84f-4c21-b202-3b5ba520312c
+
+###
+PATCH http://localhost:3000/users/current
+Content-Type: application/json
+Accept: application/json
+Authorization: a0168541-4092-4c01-9fd8-fad37f6befda
+
+{
+    "name" : "testupdate",
+    "password" : "1234update"
+}
+
+###
+DELETE   http://localhost:3000/users/logout
+Content-Type: application/json
+Accept: application/json
+Authorization: eef4ac1c-f77f-41ac-b26b-7f5f087c75e6

@@ -1,0 +1,37 @@
+POST http://localhost:3000/orders
+Content-Type: application/json
+Accept: application/json
+Authorization: df2a1f76-15cd-46cd-98c5-d3acab66ee93
+
+{
+    "addressId" : 10
+}
+
+###
+PATCH http://localhost:3000/orders/7
+Content-Type: application/json
+Accept: application/json
+Authorization: df2a1f76-15cd-46cd-98c5-d3acab66ee93
+
+{
+    "status" : "DELIVERED",
+    "addressId" : 10
+}
+
+###
+GET http://localhost:3000/orders/5
+Content-Type: application/json
+Accept: application/json
+Authorization: 0ded79e9-b84f-4c21-b202-3b5ba520312c
+
+###
+GET http://localhost:3000/orders
+Content-Type: application/json
+Accept: application/json
+Authorization: df2a1f76-15cd-46cd-98c5-d3acab66ee93
+
+###
+DELETE http://localhost:3000/orders/11
+Content-Type: application/json
+Accept: application/json
+Authorization: df2a1f76-15cd-46cd-98c5-d3acab66ee93
