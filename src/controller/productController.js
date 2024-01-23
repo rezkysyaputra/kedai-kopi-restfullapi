@@ -6,9 +6,11 @@ const list = async (req, res, next) => {
       page: req.query.page,
       size: req.query.size,
     };
+    console.log(paging);
     const result = await productService.list(paging);
     res.status(200).json({
-      data: result,
+      data: result.data,
+      paging: result.paging,
     });
   } catch (error) {
     next(error);
@@ -26,4 +28,22 @@ const get = async (req, res, next) => {
   }
 };
 
-export default { list, get };
+const search = async (req, res, next) => {
+  try {
+    const request = {
+      name: req.query.name,
+      page: req.query.page,
+      size: req.query.size,
+    };
+    console.log(request);
+    const result = await productService.search(request);
+    res.status(200).json({
+      data: result.data,
+      paging: result.paging,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { list, get, search };

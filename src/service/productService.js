@@ -3,6 +3,7 @@ import { ResponseError } from '../error/ResponseError.js';
 import {
   getProductValidation,
   listProductValidation,
+  searchProductValidation,
 } from '../validation/productValidation.js';
 import { validate } from '../validation/validation.js';
 
@@ -53,4 +54,40 @@ const get = async (productId) => {
   return product;
 };
 
-export default { list, get };
+const search = async (request) => {
+  request = validate(searchProductValidation, request);
+
+  const skip = (request.page - 1) * request.size;
+  const totalProducts = await prisma.product.count({
+    where: {
+      name: {
+        contains: request.name,
+      },
+    },
+  });
+
+  const products = await prisma.product.findMany({
+    where: {
+      name: {
+        contains: request.name,
+      },
+    },
+    take: request.size,
+    skip: skip,
+  });
+
+  if (!totalProducts) {
+    throw new ResponseError(404, 'products is not found');
+  }
+
+  return {
+    data: products,
+    paging: {
+      page: request.page,
+      totalItems: totalProducts,
+      totalPage: Math.ceil(totalProducts / request.size),
+    },
+  };
+};
+
+export default { list, get, search };

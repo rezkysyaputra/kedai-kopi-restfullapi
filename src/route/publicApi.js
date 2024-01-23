@@ -8,5 +8,6 @@ publicRouter.post('/users/login', userController.login);
 
 // PRODUCT API
 publicRouter.get('/products', productController.list);
+publicRouter.get('/products/search', productController.search);
 publicRouter.get('/products/:productId', productController.get);
 export { publicRouter };
