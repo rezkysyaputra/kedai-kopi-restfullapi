@@ -73,8 +73,7 @@ Headers :
 
 Query params:
 
-- email : Search by email using Like, optional
-- phone : Search by phone using Like, optional
+- name : Search by name using Like, optional
 - page : Number of page, default 1
 - size : Size per page, default 10
 
